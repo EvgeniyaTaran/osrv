@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OSRV.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace OSRV
         public MainWindow()
         {
             InitializeComponent();
+            Robot R1 = new Robot(Robot1);
+            Robot R2 = new Robot(Robot2);
+            R1.Move("R1", 24);
+            R2.Move("R2", 15);
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
