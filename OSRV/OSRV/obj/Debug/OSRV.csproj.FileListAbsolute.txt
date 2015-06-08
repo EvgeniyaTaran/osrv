@@ -11,3 +11,16 @@ D:\Dropbox (Старый)\КПІ\2014 - 2015\Проектирование ОСР
 D:\Dropbox (Старый)\КПІ\2014 - 2015\Проектирование ОСРВ\osrv\OSRV\OSRV\obj\Debug\OSRV.csproj.GenerateResource.Cache
 D:\Dropbox (Старый)\КПІ\2014 - 2015\Проектирование ОСРВ\osrv\OSRV\OSRV\obj\Debug\OSRV.exe
 D:\Dropbox (Старый)\КПІ\2014 - 2015\Проектирование ОСРВ\osrv\OSRV\OSRV\obj\Debug\OSRV.pdb
+D:\study\osrv\OSRV\OSRV\bin\Debug\OSRV.exe.config
+D:\study\osrv\OSRV\OSRV\obj\Debug\OSRV.exe
+D:\study\osrv\OSRV\OSRV\obj\Debug\OSRV.pdb
+D:\study\osrv\OSRV\OSRV\bin\Debug\OSRV.exe
+D:\study\osrv\OSRV\OSRV\bin\Debug\OSRV.pdb
+D:\study\osrv\OSRV\OSRV\obj\Debug\OSRV.csprojResolveAssemblyReference.cache
+D:\study\osrv\OSRV\OSRV\obj\Debug\MainWindow.baml
+D:\study\osrv\OSRV\OSRV\obj\Debug\MainWindow.g.cs
+D:\study\osrv\OSRV\OSRV\obj\Debug\App.g.cs
+D:\study\osrv\OSRV\OSRV\obj\Debug\OSRV_MarkupCompile.cache
+D:\study\osrv\OSRV\OSRV\obj\Debug\OSRV.g.resources
+D:\study\osrv\OSRV\OSRV\obj\Debug\OSRV.Properties.Resources.resources
+D:\study\osrv\OSRV\OSRV\obj\Debug\OSRV.csproj.GenerateResource.Cache
