@@ -4,16 +4,21 @@
 winexe
 C#
 .cs
-D:\study\osrv\OSRV\OSRV\obj\Debug\
+D:\Dropbox (Старый)\КПІ\2014 - 2015\Проектирование ОСРВ\osrv\OSRV\OSRV\obj\Debug\
 OSRV
 none
 false
 DEBUG;TRACE
-D:\study\osrv\OSRV\OSRV\App.xaml
+D:\Dropbox (Старый)\КПІ\2014 - 2015\Проектирование ОСРВ\osrv\OSRV\OSRV\App.xaml
 11151548125
 
+<<<<<<< HEAD
 19-754830849
 121886138872
+=======
+10-1286541755
+12-1401562060
+>>>>>>> 362605f456932380039bf25ded533f965ed4123f
 MainWindow.xaml;
 
 False
