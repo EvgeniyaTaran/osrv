@@ -14,16 +14,18 @@
                         <MenuItem Header=" Открыть лог"></MenuItem>
                         <MenuItem Header="Выйти"></MenuItem>
                     </MenuItem>
-                    
+
                 </Menu>
-                <TextBox Height =" 150" TextWrapping="Wrap" Text="TextBox" Margin="10"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="Очистить" Height="30" Width="150" Margin="50"/>
-                    <Button Content="Выполнить анализ" Height="30" Width="150" Margin="50"/>
+                <TextBox Name="tbCode" Height ="125" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="10" MinLines="20" />
+                <TextBox Name="tbErrors" Height ="51" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="10" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" Margin="10,0,11,0">
+                    <Button Name="btnClear" Content="Очистить" Height="30" Width="150" Margin="10,7,10,7"/>
+                    <Button Name="btnSave" Content="Сохранить" Height="30" Width="150" Margin="10,7,10,7"/>
+                    <Button Name="btnCompile" Content="Выполнить анализ" Height="30" Width="150" Margin="10,7,10,7" Click="btnCompile_Click"/>
                 </StackPanel>
-                
+
             </StackPanel>
-            
+
         </TabItem>
         <TabItem Header="ОСРВ"
                  Name="OSRV"
@@ -49,7 +51,7 @@
                             Canvas.Left="20"></Rectangle>
                 </Canvas>
             </StackPanel>
-            
+
         </TabItem>
 
 

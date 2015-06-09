@@ -65,6 +65,7 @@
     <Compile Include="Compiler\Errors\SemanticError.cs" />
     <Compile Include="Compiler\Errors\SyntaxError.cs" />
     <Compile Include="Compiler\Lexer.cs" />
+    <Compile Include="Compiler\MyCommand.cs" />
     <Compile Include="Compiler\Sentence.cs" />
     <Compile Include="Compiler\SentenceDefinition.cs" />
     <Compile Include="Compiler\Token.cs" />

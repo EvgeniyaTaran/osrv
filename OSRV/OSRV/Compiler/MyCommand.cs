@@ -18,4 +18,12 @@ namespace OSRV.Compiler
         Move,
         Rotate
     }
+
+    public enum RobotsActivity
+    {
+        None,
+        R1,
+        R2,
+        Both
+    }
 }
