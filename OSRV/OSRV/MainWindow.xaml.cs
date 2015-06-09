@@ -25,18 +25,15 @@ namespace OSRV
         public MainWindow()
         {
             InitializeComponent();
-            
-            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Robot R1 = new Robot(Robot1);
-            Robot R2 = new Robot(Robot2);
-            R1.Rotate("R1", 90);
-            R1.Rotate("R1", -45);
-            R1.Move("R2", 5);
-            //R1.Rotate("R1", -45);
+            Robot R1 = new Robot(Robot1, AppWindow);
+            Robot R2 = new Robot(Robot2, AppWindow);
+            R1.Move(10);
+            R1.Move(2);
+            R1.Move(-3);
         }
     }
 }

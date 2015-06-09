@@ -13,21 +13,24 @@ namespace OSRV.Models
 {
     public class Robot
     {
-        public Robot(Rectangle rect)
+        public Robot(Rectangle rect, MainWindow window)
         {
-            rectangle = rect;
+            _rectangle = rect;
+            _window = window;
         }
-        public Rectangle rectangle;
+        private Rectangle _rectangle;
+
+        private MainWindow _window;
         public string Name { get; set; }
 
         private TimeSpan _time = TimeSpan.FromSeconds(0);
         public TimeSpan Time { get { return _time; } }
-        private int _position = 0;
+        //private int _position = 0;
         public int Position 
         {
-            get { return _getPosition(); }
+            get { return (int)Canvas.GetLeft(_rectangle); }
             set { if (value  < 500 && value >= 0)
-            { _position = value; }
+            { Canvas.SetLeft(_rectangle, (int)value); }
             else { MessageBox.Show("Sorry, you have entered incorrrect position for robot {0}, position won't be changed", this.Name); };
             }
         }
@@ -39,22 +42,7 @@ namespace OSRV.Models
             set { _rotation = value;}
         }
 
-
-
-        private int _getPosition()
-        {
-            if (_position > 500) 
-            {
-                return 500;
-            }
-            if (_position < 0)
-            {
-                return 0;
-            }
-            return _position;
-        }
-
-        private int _getRotation()
+          private int _getRotation()
         {
             if (_rotation > 360)
             {
@@ -69,32 +57,44 @@ namespace OSRV.Models
             }
             return _rotation;
         }
-        public void Move (string name, int meters)
+        public void Rotate (int degrees)
         {
-            this.Name = name;
-            DoubleAnimation animation = new DoubleAnimation();
-            animation.From = Position;
-            animation.BeginTime = this.Time;
-            animation.To = Position + meters*20;
-            animation.Duration = new Duration(TimeSpan.Parse("0:0:5"));
-            rectangle.BeginAnimation(Canvas.LeftProperty, animation);
-            Position = Position + meters * 20;
-            this._time = this._time + TimeSpan.FromSeconds(5); 
-        }
-        public void Rotate (string name, int degrees)
-        {
-            this.Name = name;
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = Rotation;
             animation.To = Rotation + degrees;
             animation.Duration = new Duration(TimeSpan.FromSeconds(5));
             animation.BeginTime = this.Time;
             RotateTransform transform = new RotateTransform();
-            rectangle.RenderTransform = transform;
-            rectangle.RenderTransformOrigin = new Point(0.5, 0.5);
+            _rectangle.RenderTransform = transform;
+            _rectangle.RenderTransformOrigin = new Point(0.5, 0.5);
             transform.BeginAnimation(RotateTransform.AngleProperty, animation);
             this.Rotation = Rotation + degrees;
             this._time = this._time + TimeSpan.FromSeconds(5); 
+        }
+
+        public void Move (int meters)
+        {
+            Duration duration = new Duration(TimeSpan.FromSeconds(5));
+            // Create DoubleAnimation, set DA timeline duration, preserve end state of rectangle after completed animation run
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.Duration = duration;
+            myDoubleAnimation.FillBehavior = FillBehavior.HoldEnd;
+            //Create storyboard, set SB timeline duration, add animation to storyboard, set rectangle as target 
+            //and specify the direction in which rectangle moves 
+            Storyboard sb = new Storyboard();
+            sb.Duration = duration;
+            sb.Children.Add(myDoubleAnimation);
+            Storyboard.SetTarget(myDoubleAnimation, _rectangle);
+            Storyboard.SetTargetProperty(myDoubleAnimation, new PropertyPath(Canvas.LeftProperty));
+            //Move robot by x meters
+            myDoubleAnimation.By = meters * 20;
+            _window.AppWindow.TabRoot.Resources.Add(Guid.NewGuid(), sb);
+            // Begin the animation.
+            sb.Begin();
+            //Set rectangle left position on canva to the new position
+            Position = (int)Canvas.GetLeft(_rectangle) + meters * 20;
+            //Set begin time for the next run of double animation
+            this._time = this._time + TimeSpan.FromSeconds(5);
         }
     }
 }

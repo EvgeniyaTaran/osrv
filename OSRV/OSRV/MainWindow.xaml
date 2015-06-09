@@ -1,8 +1,10 @@
-﻿<Window x:Class="OSRV.MainWindow"
+﻿<Window Name="AppWindow"
+        x:Class="OSRV.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="535">
-    <TabControl Grid.ColumnSpan="2" Margin="0,0,0.4,0.4">
+    <TabControl  Name="TabRoot"
+        Grid.ColumnSpan="2" Margin="0,0,0.4,0.4">
         <TabItem Header="Компилятор"
                  Name="Compiler"
                  IsSelected="False">
@@ -29,7 +31,8 @@
             <StackPanel>
                 <Button Height="25"
                         Content="Визуализировать" Click="Button_Click"></Button>
-                <Canvas Margin="5">
+                <Canvas Name="canva"
+                    Margin="5">
                     <Rectangle
                             Width=" 12"
                             Height="20"
@@ -43,7 +46,7 @@
                             Fill="Red"
                             Name="Robot2"
                             Canvas.Top="230"
-                            Canvas.Left="490"></Rectangle>
+                            Canvas.Left="20"></Rectangle>
                 </Canvas>
             </StackPanel>
             
