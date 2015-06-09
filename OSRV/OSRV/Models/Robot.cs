@@ -21,12 +21,12 @@ namespace OSRV.Models
         public string Name { get; set; }
 
         private TimeSpan _time = TimeSpan.FromSeconds(0);
-        public TimeSpan time { get { return _time; } }
+        public TimeSpan Time { get { return _time; } }
         private int _position = 0;
         public int Position 
         {
             get { return _getPosition(); }
-            set { if (value  < 500 && value > 0)
+            set { if (value  < 500 && value >= 0)
             { _position = value; }
             else { MessageBox.Show("Sorry, you have entered incorrrect position for robot {0}, position won't be changed", this.Name); };
             }
@@ -74,8 +74,8 @@ namespace OSRV.Models
             this.Name = name;
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = Position;
-            animation.BeginTime = this.time;
-            animation.To = meters*20;
+            animation.BeginTime = this.Time;
+            animation.To = Position + meters*20;
             animation.Duration = new Duration(TimeSpan.Parse("0:0:5"));
             rectangle.BeginAnimation(Canvas.LeftProperty, animation);
             Position = Position + meters * 20;
@@ -86,14 +86,14 @@ namespace OSRV.Models
             this.Name = name;
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = Rotation;
-            animation.To = degrees;
+            animation.To = Rotation + degrees;
             animation.Duration = new Duration(TimeSpan.FromSeconds(5));
-            animation.BeginTime = this.time;
+            animation.BeginTime = this.Time;
             RotateTransform transform = new RotateTransform();
             rectangle.RenderTransform = transform;
             rectangle.RenderTransformOrigin = new Point(0.5, 0.5);
             transform.BeginAnimation(RotateTransform.AngleProperty, animation);
-            this.Rotation = degrees;
+            this.Rotation = Rotation + degrees;
             this._time = this._time + TimeSpan.FromSeconds(5); 
         }
     }
