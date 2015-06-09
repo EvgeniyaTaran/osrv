@@ -69,9 +69,8 @@ namespace OSRV.Models
             }
             return _rotation;
         }
-        public void Move (string name, int meters)
+        public void Move (int meters)
         {
-            this.Name = name;
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = Position;
             animation.BeginTime = this.time;
@@ -81,9 +80,8 @@ namespace OSRV.Models
             Position = Position + meters * 20;
             this._time = this._time + TimeSpan.FromSeconds(5); 
         }
-        public void Rotate (string name, int degrees)
+        public void Rotate (int degrees)
         {
-            this.Name = name;
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = Rotation;
             animation.To = degrees;
