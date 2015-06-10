@@ -1,4 +1,6 @@
 ﻿using OSRV.Compiler;
+using OSRV.Compiler.Errors;
+using OSRV.Loggers;
 using OSRV.Models;
 using System;
 using System.Collections.Generic;
@@ -32,8 +34,8 @@ namespace OSRV
         public MainWindow()
         {
             InitializeComponent();
-            R1 = new Robot(Robot1);
-            R2 = new Robot(Robot2);
+            R1 = new Robot(Robot1, AppWindow);
+            R2 = new Robot(Robot2, AppWindow);
             lexer = new Lexer();
             lexer.AddSentenceDefinition(new SentenceDefinition(new Regex(@"((r|R)otate|(m|M)ove)( )*(R|r)(1|2)( )*-?(\d+)( )*")));
             lexer.AddDefinition(new TokenDefinition("action", new Regex(@"((r|R)otate|(m|M)ove)")));
@@ -43,11 +45,11 @@ namespace OSRV
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Robot R1 = new Robot(Robot1, AppWindow);
+           /* Robot R1 = new Robot(Robot1, AppWindow);
             Robot R2 = new Robot(Robot2, AppWindow);
             R1.Move(10);
             R1.Move(2);
-            R1.Move(-3);
+            R1.Move(-3);*/
             //R1.Move("R1", 10);
             //R2.Move("R2", 15);
             //R1.Rotate("R1", 90);
@@ -164,11 +166,20 @@ namespace OSRV
                 {
                     tbErrors.Text += (error.Message + "\r\n");
                 }
+                List<Error> listOfAllErrors = new List<Error>();
+
+                //////////////////////////////////////////////////
+                //добавить три строки:
+                listOfAllErrors.AddRange(lexer.SyntaxErrors);
+                listOfAllErrors.AddRange(lexer.SemanticErrors);
+                CompilationLogger.Instance.Log(listOfAllErrors);
             }
             else
             {
                 tbErrors.Text = "Compiled success";
                 isCompiledSuccess = true;
+                CompilationLogger.Instance.Log(new string[] { "Компиляция выполнена успешно." });
+                ActionLogger.Instance.Log(new string[] { tbCode.Text });
             }
         }
     }

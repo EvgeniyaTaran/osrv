@@ -71,6 +71,8 @@
     <Compile Include="Compiler\Token.cs" />
     <Compile Include="Compiler\TokenDefinition.cs" />
     <Compile Include="Compiler\TokenPosition.cs" />
+    <Compile Include="Loggers\ActionLogger.cs" />
+    <Compile Include="Loggers\CompilationLogger.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
