@@ -1,9 +1,11 @@
-﻿using OSRV.Compiler;
+﻿using Microsoft.Win32;
+using OSRV.Compiler;
 using OSRV.Compiler.Errors;
 using OSRV.Loggers;
 using OSRV.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -144,6 +146,8 @@ namespace OSRV
 
         private void btnCompile_Click(object sender, RoutedEventArgs e)
         {
+            Canvas.SetLeft(AppWindow.Robot1, 0);
+            Canvas.SetLeft(AppWindow.Robot2, 20);
             tbErrors.Text += (DateTime.Now.ToString() + ": Start compile...\r\n");
             lexer.Commands.Clear();
             lexer.SemanticErrors.Clear();
@@ -177,6 +181,31 @@ namespace OSRV
                 //ActionLogger.Instance.Log(new string[] { tbCode.Text });
                 CompileResult.Instance.Log(GenerateCommandText());
             }
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            tbCode.Text = String.Empty;
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.FileName = "D:\\Log.txt";
+            string file = File.ReadAllText(of.FileName);
+            MessageBox.Show(file);
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            AppWindow.Close();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            string programText = tbCode.Text;
+            File.WriteAllText("D:\\UserInput.txt", programText);
+            MessageBox.Show("Your program was saved to D:\\UserInput.txt");
         }
     }
 }
