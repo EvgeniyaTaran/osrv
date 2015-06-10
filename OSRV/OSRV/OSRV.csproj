@@ -64,6 +64,7 @@
     <Compile Include="Compiler\Errors\Error.cs" />
     <Compile Include="Compiler\Errors\SemanticError.cs" />
     <Compile Include="Compiler\Errors\SyntaxError.cs" />
+    <Compile Include="Compiler\Function.cs" />
     <Compile Include="Compiler\Lexer.cs" />
     <Compile Include="Compiler\MyCommand.cs" />
     <Compile Include="Compiler\Sentence.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Compiler\TokenPosition.cs" />
     <Compile Include="Loggers\ActionLogger.cs" />
     <Compile Include="Loggers\CompilationLogger.cs" />
+    <Compile Include="Loggers\CompileResult.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

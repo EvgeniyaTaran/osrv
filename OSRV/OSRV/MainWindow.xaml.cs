@@ -19,6 +19,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.CodeDom.Compiler;
+using Microsoft.CSharp;
+using System.Reflection;
+
+
 namespace OSRV
 {
     /// <summary>
@@ -45,46 +50,36 @@ namespace OSRV
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           /* Robot R1 = new Robot(Robot1, AppWindow);
-            Robot R2 = new Robot(Robot2, AppWindow);
-            R1.Move(10);
-            R1.Move(2);
-            R1.Move(-3);*/
-            //R1.Move("R1", 10);
-            //R2.Move("R2", 15);
-            //R1.Rotate("R1", 90);
-            //R1.Move("R1", 2);
-            //List<MyCommand> commands = new List<MyCommand>();
-            //commands.Add(new MyCommand
-            //{
-            //    ActionType = ActionType.Move,
-            //    RobotName = "R1",
-            //    Value = 10
-            //});
-            //commands.Add(new MyCommand
-            //{
-            //    ActionType = ActionType.Move,
-            //    RobotName = "R2",
-            //    Value = 15
-            //});
-            //commands.Add(new MyCommand
-            //{
-            //    ActionType = ActionType.Rotate,
-            //    RobotName = "R1",
-            //    Value = 90
-            //});
-            //commands.Add(new MyCommand
-            //{
-            //    ActionType = ActionType.Move,
-            //    RobotName = "R1",
-            //    Value = 2
-            //});
             if (isCompiledSuccess) 
             {
-                foreach (var command in lexer.Commands)
+                ICodeCompiler compiler = new CSharpCodeProvider().CreateCompiler();
+                CompilerParameters parameters = new CompilerParameters();
+                parameters.ReferencedAssemblies.Add("System.dll");
+                parameters.ReferencedAssemblies.Add("OSRV.exe");
+                parameters.GenerateInMemory = true;
+                string code = "public class FunctionCS : OSRV.Compiler.Function" +
+                    "{\n" +
+                    "   public override void RunProgram(OSRV.Models.Robot R1, OSRV.Models.Robot R2)\n" +
+                    "   {\n";
+                List<string> commandsAsStrings = GenerateCommandText();
+                foreach (string item in commandsAsStrings)
                 {
-                    executeCommand(command);
+                    code += item + "\n";
                 }
+                code +=
+                    "   }\n" +
+                    "}\n";
+                CompilerResults compilerResults = compiler.CompileAssemblyFromSource(parameters, code);
+                Assembly assembly = compilerResults.CompiledAssembly;
+                Function functionCs = assembly.CreateInstance("FunctionCS") as Function;
+                functionCs.RunProgram(R1, R2);
+                ActionLogger.Instance.Log(new string[] { tbCode.Text });
+                
+
+                //foreach (var command in lexer.Commands)
+                //{
+                //    executeCommand(command);
+                //}
             }
         }
 
@@ -179,7 +174,8 @@ namespace OSRV
                 tbErrors.Text = "Compiled success";
                 isCompiledSuccess = true;
                 CompilationLogger.Instance.Log(new string[] { "Компиляция выполнена успешно." });
-                ActionLogger.Instance.Log(new string[] { tbCode.Text });
+                //ActionLogger.Instance.Log(new string[] { tbCode.Text });
+                CompileResult.Instance.Log(GenerateCommandText());
             }
         }
     }
