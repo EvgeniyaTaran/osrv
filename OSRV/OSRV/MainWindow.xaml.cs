@@ -150,7 +150,7 @@ namespace OSRV
             lexer.SyntaxErrors.Clear();
 
             lexer.ParseToSentences(tbCode.Text);
-            if (lexer.SemanticErrors.Any() || lexer.SyntaxErrors.Any())
+            if (lexer.SemanticErrors.Any() || lexer.SyntaxErrors.Any() || String.IsNullOrEmpty(tbCode.Text))
             {
                 var errors = String.Empty;
                 foreach (var error in lexer.SemanticErrors)
