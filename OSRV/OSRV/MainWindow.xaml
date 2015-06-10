@@ -7,20 +7,20 @@
         Grid.ColumnSpan="2" Margin="0,0,0.4,0.4">
         <TabItem Header="Компилятор"
                  Name="Compiler"
-                 IsSelected="False">
+                 IsSelected="True">
             <StackPanel>
                 <Menu>
                     <MenuItem Header=" Меню">
-                        <MenuItem Header=" Открыть лог"></MenuItem>
-                        <MenuItem Header="Выйти"></MenuItem>
+                        <MenuItem Name ="Open" Header=" Открыть лог" Click="Open_Click"></MenuItem>
+                        <MenuItem Name ="Exit" Header="Выйти" Click="Exit_Click"></MenuItem>
                     </MenuItem>
 
                 </Menu>
                 <TextBox Name="tbCode" Height ="125" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="10" MinLines="20" />
                 <TextBox Name="tbErrors" Height ="51" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="10" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" Margin="10,0,11,0">
-                    <Button Name="btnClear" Content="Очистить" Height="30" Width="150" Margin="10,7,10,7"/>
-                    <Button Name="btnSave" Content="Сохранить" Height="30" Width="150" Margin="10,7,10,7"/>
+                    <Button Name="btnClear" Content="Очистить" Height="30" Width="150" Margin="10,7,10,7" Click="btnClear_Click"/>
+                    <Button Name="btnSave" Content="Сохранить" Height="30" Width="150" Margin="10,7,10,7" Click="btnSave_Click"/>
                     <Button Name="btnCompile" Content="Выполнить анализ" Height="30" Width="150" Margin="10,7,10,7" Click="btnCompile_Click"/>
                 </StackPanel>
 
@@ -28,8 +28,7 @@
 
         </TabItem>
         <TabItem Header="ОСРВ"
-                 Name="OSRV"
-                 IsSelected="True">
+                 Name="OSRV">
             <StackPanel>
                 <Button Height="25"
                         Content="Визуализировать" Click="Button_Click"></Button>

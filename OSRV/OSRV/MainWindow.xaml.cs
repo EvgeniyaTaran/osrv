@@ -1,9 +1,11 @@
-﻿using OSRV.Compiler;
+﻿using Microsoft.Win32;
+using OSRV.Compiler;
 using OSRV.Compiler.Errors;
 using OSRV.Loggers;
 using OSRV.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -45,40 +47,6 @@ namespace OSRV
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           /* Robot R1 = new Robot(Robot1, AppWindow);
-            Robot R2 = new Robot(Robot2, AppWindow);
-            R1.Move(10);
-            R1.Move(2);
-            R1.Move(-3);*/
-            //R1.Move("R1", 10);
-            //R2.Move("R2", 15);
-            //R1.Rotate("R1", 90);
-            //R1.Move("R1", 2);
-            //List<MyCommand> commands = new List<MyCommand>();
-            //commands.Add(new MyCommand
-            //{
-            //    ActionType = ActionType.Move,
-            //    RobotName = "R1",
-            //    Value = 10
-            //});
-            //commands.Add(new MyCommand
-            //{
-            //    ActionType = ActionType.Move,
-            //    RobotName = "R2",
-            //    Value = 15
-            //});
-            //commands.Add(new MyCommand
-            //{
-            //    ActionType = ActionType.Rotate,
-            //    RobotName = "R1",
-            //    Value = 90
-            //});
-            //commands.Add(new MyCommand
-            //{
-            //    ActionType = ActionType.Move,
-            //    RobotName = "R1",
-            //    Value = 2
-            //});
             if (isCompiledSuccess) 
             {
                 foreach (var command in lexer.Commands)
@@ -149,6 +117,8 @@ namespace OSRV
 
         private void btnCompile_Click(object sender, RoutedEventArgs e)
         {
+            Canvas.SetLeft(AppWindow.Robot1, 0);
+            Canvas.SetLeft(AppWindow.Robot2, 20);
             tbErrors.Text += (DateTime.Now.ToString() + ": Start compile...\r\n");
             lexer.Commands.Clear();
             lexer.SemanticErrors.Clear();
@@ -181,6 +151,31 @@ namespace OSRV
                 CompilationLogger.Instance.Log(new string[] { "Компиляция выполнена успешно." });
                 ActionLogger.Instance.Log(new string[] { tbCode.Text });
             }
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            tbCode.Text = String.Empty;
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.FileName = "D:\\Log.txt";
+            string file = File.ReadAllText(of.FileName);
+            MessageBox.Show(file);
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            AppWindow.Close();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            string programText = tbCode.Text;
+            File.WriteAllText("D:\\UserInput.txt", programText);
+            MessageBox.Show("Your program was saved to D:\\UserInput.txt");
         }
     }
 }

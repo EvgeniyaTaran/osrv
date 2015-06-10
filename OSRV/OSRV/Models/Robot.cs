@@ -78,6 +78,7 @@ namespace OSRV.Models
             // Create DoubleAnimation, set DA timeline duration, preserve end state of rectangle after completed animation run
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.Duration = duration;
+            //myDoubleAnimation.FillBehavior = FillBehavior.HoldEnd;
             myDoubleAnimation.FillBehavior = FillBehavior.HoldEnd;
             //Create storyboard, set SB timeline duration, add animation to storyboard, set rectangle as target 
             //and specify the direction in which rectangle moves 
